@@ -6,9 +6,9 @@ info:
 servers:
   - url: 'http://localhost:8080/api/v1'
 paths:
-  /products:
+  /product-prices:
     get:
-      description: Returns product details
+      description: Returns product price details
       parameters:
         - name: productId
           in: query
@@ -33,19 +33,19 @@ paths:
             example: 2020-06-14-00.00.00
       responses:
         '200':
-          $ref: '#/components/responses/ProductResponse'
+          $ref: '#/components/responses/ProductPriceResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
 components:
   responses:
-    ProductResponse:
-      description: Product details
+    ProductPriceResponse:
+      description: Product price details
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Product'
+            $ref: '#/components/schemas/ProductPrice'
     BadRequestResponse:
       description: Bad request
       content:
@@ -55,10 +55,10 @@ components:
     NotFoundResponse:
       description: Product not found
   schemas:
-    Product:
+    ProductPrice:
       type: object
       required:
-        - id
+        - productId
         - brandId
         - rate
         - startDate
@@ -66,7 +66,7 @@ components:
         - price
         - currency
       properties:
-        id:
+        productId:
           type: integer
           example: 35455
         brandId:
