@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "fe422fbc-dc93-498d-bf8b-44cccc1b6a4f",
+		"name": "Prices microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30808794"
+	},
+	"item": [
+		{
+			"name": "Get product price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product-prices?productId=35455&brandId=1&date=2020-06-14-10.00.00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product-prices"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "35455"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "date",
+							"value": "2020-06-14-10.00.00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
