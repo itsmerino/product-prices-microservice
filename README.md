@@ -1,4 +1,4 @@
-# Product Prices Microservice ![ci](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml/badge.svg)
+# Product Prices Microservice [![ci](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml/badge.svg)](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml)
 
 Service that provides product prices through a REST endpoint.
 
