@@ -14,9 +14,9 @@
 	</parent>
 
 	<groupId>com.itsmerino</groupId>
-	<artifactId>prices</artifactId>
+	<artifactId>product-prices</artifactId>
 	<version>1.0.0</version>
-	<name>prices</name>
+	<name>product-prices</name>
 
 	<properties>
 		<java.version>17</java.version>

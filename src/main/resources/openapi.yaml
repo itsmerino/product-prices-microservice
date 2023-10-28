@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Prices Microservice
+  title: Product Prices Microservice
   description: Microservice that provides product prices
   version: 1.0.0
 servers:

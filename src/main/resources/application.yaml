@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:h2:mem:prices-db
+    url: jdbc:h2:mem:product-prices-db
     username: sa
     password: sa
     driverClassName: org.h2.Driver
