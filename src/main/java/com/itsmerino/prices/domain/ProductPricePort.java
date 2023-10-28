@@ -5,5 +5,7 @@ import java.util.Optional;
 
 public interface ProductPricePort {
 
-    Optional<ProductPrice> search(Integer productId, Integer brandId, LocalDateTime date);
+    Optional<ProductPrice> search(Integer productId,
+                                  Integer brandId,
+                                  LocalDateTime date);
 }

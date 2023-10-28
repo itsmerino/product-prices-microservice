@@ -16,5 +16,7 @@ public interface H2ProductPriceRepository extends JpaRepository<ProductPrice, In
             "WHERE p.productId = :productId AND p.brandId = :brandId AND :date BETWEEN p.startDate AND p.endDate " +
             "ORDER BY p.rate DESC " +
             "LIMIT 1")
-    Optional<ProductPrice> findByProductIdAndBrandIdAndDate(Integer productId, Integer brandId, LocalDateTime date);
+    Optional<ProductPrice> findByProductIdAndBrandIdAndDate(Integer productId,
+                                                            Integer brandId,
+                                                            LocalDateTime date);
 }

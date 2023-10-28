@@ -19,7 +19,9 @@ public class ProductPriceAdapter implements ProductPricePort {
     }
 
     @Override
-    public Optional<ProductPrice> search(Integer productId, Integer brandId, LocalDateTime date) {
+    public Optional<ProductPrice> search(Integer productId,
+                                         Integer brandId,
+                                         LocalDateTime date) {
         return productPriceRepository.findByProductIdAndBrandIdAndDate(productId, brandId, date);
     }
 }

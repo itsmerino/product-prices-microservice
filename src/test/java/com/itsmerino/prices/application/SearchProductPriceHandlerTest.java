@@ -20,7 +20,6 @@ class SearchProductPriceHandlerTest {
 
     private final ConversionService conversionService = mock(ConversionService.class);
     private final ProductPricePort productPricePort = mock(ProductPricePort.class);
-
     private final SearchProductPriceHandler sut = new SearchProductPriceHandler(conversionService, productPricePort);
 
     @Test

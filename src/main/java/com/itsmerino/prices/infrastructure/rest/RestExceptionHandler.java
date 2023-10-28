@@ -13,15 +13,23 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(MethodArgumentTypeMismatchException exception) {
-        return ResponseEntity.badRequest().body(
-                ErrorResponse.builder()
-                        .message(String.format(BAD_REQUEST_MESSAGE, exception.getName()))
-                        .build()
-        );
+        ErrorResponse errorResponse = buildErrorResponse(exception);
+
+        return ResponseEntity.badRequest()
+                .body(errorResponse);
     }
 
     @ExceptionHandler(ProductPriceNotFoundException.class)
     public ResponseEntity<Void> handleNotFoundException() {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound()
+                .build();
+    }
+
+    private ErrorResponse buildErrorResponse(MethodArgumentTypeMismatchException exception) {
+        String message = String.format(BAD_REQUEST_MESSAGE, exception.getName());
+
+        return ErrorResponse.builder()
+                .message(message)
+                .build();
     }
 }

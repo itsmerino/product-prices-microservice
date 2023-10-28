@@ -30,14 +30,19 @@ public class ProductPriceController {
     public ResponseEntity<ProductPriceResponse> search(@RequestParam Integer productId,
                                                        @RequestParam Integer brandId,
                                                        @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime date) {
-        return ResponseEntity.ok(
-                searchProductPriceHandler.handle(
-                        ProductPriceQuery.builder()
-                                .productId(productId)
-                                .brandId(brandId)
-                                .date(date)
-                                .build()
-                )
-        );
+        ProductPriceQuery productPriceQuery = buildProductPriceQuery(productId, brandId, date);
+        ProductPriceResponse productPriceResponse = searchProductPriceHandler.handle(productPriceQuery);
+
+        return ResponseEntity.ok(productPriceResponse);
+    }
+
+    private ProductPriceQuery buildProductPriceQuery(Integer productId,
+                                                     Integer brandId,
+                                                     LocalDateTime date) {
+        return ProductPriceQuery.builder()
+                .productId(productId)
+                .brandId(brandId)
+                .date(date)
+                .build();
     }
 }
