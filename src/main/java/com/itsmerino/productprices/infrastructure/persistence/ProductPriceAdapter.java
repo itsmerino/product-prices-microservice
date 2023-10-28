@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 @Component
 public class ProductPriceAdapter implements ProductPricePort {
 
-    private final H2ProductPriceRepository productPriceRepository;
+    private final ProductPriceRepository productPriceRepository;
 
     @Autowired
-    public ProductPriceAdapter(H2ProductPriceRepository productPriceRepository) {
+    public ProductPriceAdapter(ProductPriceRepository productPriceRepository) {
         this.productPriceRepository = productPriceRepository;
     }
 
     @Override
-    public Optional<ProductPrice> search(Integer productId,
-                                         Integer brandId,
-                                         LocalDateTime date) {
-        return productPriceRepository.findByProductIdAndBrandIdAndDate(productId, brandId, date);
+    public List<ProductPrice> search(Integer productId,
+                                     Integer brandId,
+                                     LocalDateTime date) {
+        return productPriceRepository.findAllByProductIdAndBrandIdAndDate(productId, brandId, date);
     }
 }

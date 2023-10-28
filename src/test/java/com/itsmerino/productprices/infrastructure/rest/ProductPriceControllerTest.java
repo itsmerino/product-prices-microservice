@@ -38,7 +38,7 @@ class ProductPriceControllerTest {
     @Test
     void itShouldReturnProductPriceResponse() throws IOException, InterruptedException {
         HttpResponse<String> response = HttpUtils.getProductPrice(35455, 1, "2020-06-14-10.00.00");
-        ProductPriceResponse productPriceResponse = objectMapper.readValue(response.body(), ProductPriceResponse.class);;
+        ProductPriceResponse productPriceResponse = objectMapper.readValue(response.body(), ProductPriceResponse.class);
 
         assertEquals(HttpStatus.OK.value(), response.statusCode());
         assertAll(

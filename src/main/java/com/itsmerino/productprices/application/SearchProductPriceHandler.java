@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.List;
 
 @Component
 public class SearchProductPriceHandler {
@@ -23,12 +24,14 @@ public class SearchProductPriceHandler {
     }
 
     public ProductPriceResponse handle(ProductPriceQuery productPriceQuery) {
-        return searchProductPrice(productPriceQuery)
+        return searchProductPrices(productPriceQuery)
+                .stream()
+                .max(Comparator.comparingInt(ProductPrice::getRate))
                 .map(this::mapToProductPriceResponse)
                 .orElseThrow(ProductPriceNotFoundException::new);
     }
 
-    private Optional<ProductPrice> searchProductPrice(ProductPriceQuery productPriceQuery) {
+    private List<ProductPrice> searchProductPrices(ProductPriceQuery productPriceQuery) {
         return productPricePort.search(
                 productPriceQuery.getProductId(),
                 productPriceQuery.getBrandId(),

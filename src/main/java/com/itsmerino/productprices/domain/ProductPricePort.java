@@ -1,11 +1,11 @@
 package com.itsmerino.productprices.domain;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 public interface ProductPricePort {
 
-    Optional<ProductPrice> search(Integer productId,
-                                  Integer brandId,
-                                  LocalDateTime date);
+    List<ProductPrice> search(Integer productId,
+                              Integer brandId,
+                              LocalDateTime date);
 }

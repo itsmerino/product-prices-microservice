@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.core.convert.ConversionService;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,7 +28,7 @@ class SearchProductPriceHandlerTest {
         ProductPrice productPrice = ProductPriceMother.random();
         ProductPriceResponse productPriceResponse = ProductPriceResponseMother.random();
 
-        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(Optional.of(productPrice));
+        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(List.of(productPrice));
         when(conversionService.convert(productPrice, ProductPriceResponse.class)).thenReturn(productPriceResponse);
 
         assertEquals(productPriceResponse, sut.handle(productPriceQuery));
@@ -36,7 +36,7 @@ class SearchProductPriceHandlerTest {
 
     @Test
     void itShouldThrowNotFoundException() {
-        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(Optional.empty());
+        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(List.of());
 
         assertThrows(ProductPriceNotFoundException.class, () -> sut.handle(ProductPriceQueryMother.random()));
     }
