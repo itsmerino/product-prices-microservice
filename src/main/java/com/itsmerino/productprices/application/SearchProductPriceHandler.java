@@ -26,7 +26,7 @@ public class SearchProductPriceHandler {
     public ProductPriceResponse handle(ProductPriceQuery productPriceQuery) {
         return searchProductPrices(productPriceQuery)
                 .stream()
-                .max(Comparator.comparingInt(ProductPrice::getRate))
+                .max(Comparator.comparingInt(ProductPrice::getPriority))
                 .map(this::mapToProductPriceResponse)
                 .orElseThrow(ProductPriceNotFoundException::new);
     }
