@@ -48,7 +48,7 @@ Go to the project directory
 Run the application
 
 ```bash
-  mvn spring-boot:run
+  ./mvnw spring-boot:run
 ```
 
 ## Running Tests
@@ -56,7 +56,7 @@ Run the application
 To run tests, run the following command
 
 ```bash
-  mvn test
+  ./mvnw test
 ```
 
 ## Author
