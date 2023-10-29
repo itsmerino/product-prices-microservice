@@ -20,10 +20,13 @@ import static com.itsmerino.productprices.shared.Constants.*;
 @RequestMapping(ApiRoutes.PRODUCT_PRICES_V1)
 public class ProductPriceController {
 
+    private final ProductPriceParamsToProductPriceQueryConverter converter;
     private final SearchProductPriceHandler searchProductPriceHandler;
 
     @Autowired
-    public ProductPriceController(SearchProductPriceHandler searchProductPriceHandler) {
+    public ProductPriceController(ProductPriceParamsToProductPriceQueryConverter converter,
+                                  SearchProductPriceHandler searchProductPriceHandler) {
+        this.converter = converter;
         this.searchProductPriceHandler = searchProductPriceHandler;
     }
 
@@ -31,19 +34,9 @@ public class ProductPriceController {
     public ResponseEntity<ProductPriceResponse> search(@RequestParam Integer productId,
                                                        @RequestParam Integer brandId,
                                                        @RequestParam @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime date) {
-        ProductPriceQuery productPriceQuery = buildProductPriceQuery(productId, brandId, date);
+        ProductPriceQuery productPriceQuery = converter.convert(productId, brandId, date);
         ProductPriceResponse productPriceResponse = searchProductPriceHandler.handle(productPriceQuery);
 
         return ResponseEntity.ok(productPriceResponse);
-    }
-
-    private ProductPriceQuery buildProductPriceQuery(Integer productId,
-                                                     Integer brandId,
-                                                     LocalDateTime date) {
-        return ProductPriceQuery.builder()
-                .productId(productId)
-                .brandId(brandId)
-                .date(date)
-                .build();
     }
 }
