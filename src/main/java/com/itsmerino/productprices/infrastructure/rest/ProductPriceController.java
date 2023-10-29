@@ -3,6 +3,7 @@ package com.itsmerino.productprices.infrastructure.rest;
 import com.itsmerino.productprices.application.ProductPriceQuery;
 import com.itsmerino.productprices.application.ProductPriceResponse;
 import com.itsmerino.productprices.application.SearchProductPriceHandler;
+import com.itsmerino.productprices.shared.ApiRoutes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 import static com.itsmerino.productprices.shared.Constants.*;
 
 @RestController
-@RequestMapping(BASE_PATH + PRODUCT_PRICES_PATH)
+@RequestMapping(ApiRoutes.PRODUCT_PRICES_V1)
 public class ProductPriceController {
 
     private final SearchProductPriceHandler searchProductPriceHandler;

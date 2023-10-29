@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmerino.productprices.ProductPricesApplication;
 import com.itsmerino.productprices.application.ProductPriceResponse;
 import com.itsmerino.productprices.config.TestConfiguration;
-import com.itsmerino.productprices.shared.HttpUtils;
+import com.itsmerino.productprices.shared.RestClient;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -31,21 +31,24 @@ public class ProductPricesStepDefs {
 
     private final DateTimeFormatter formatter;
     private final ObjectMapper objectMapper;
+    private final RestClient restClient;
 
     private ProductPriceResponse productPriceResponse;
 
     @Autowired
     public ProductPricesStepDefs(DateTimeFormatter dateTimeFormatter,
-                                 ObjectMapper objectMapper) {
+                                 ObjectMapper objectMapper,
+                                 RestClient restClient) {
         this.formatter = dateTimeFormatter;
         this.objectMapper = objectMapper;
+        this.restClient = restClient;
     }
 
     @When("a customer requests the product {int} of the brand {int} at date {string}")
     public void aCustomerRequestsTheProductOfTheBrandAtDate(Integer productId,
                                                             Integer brandId,
                                                             String dateTime) throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpUtils.getProductPrice(productId, brandId, dateTime);
+        HttpResponse<String> response = restClient.getProductPrice(productId, brandId, dateTime);
         productPriceResponse = objectMapper.readValue(response.body(), ProductPriceResponse.class);
     }
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmerino.productprices.ProductPricesApplication;
 import com.itsmerino.productprices.application.ProductPriceResponse;
 import com.itsmerino.productprices.config.TestConfiguration;
-import com.itsmerino.productprices.shared.HttpUtils;
+import com.itsmerino.productprices.shared.RestClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,17 +27,20 @@ class ProductPriceControllerTest {
 
     private final DateTimeFormatter formatter;
     private final ObjectMapper objectMapper;
+    private final RestClient restClient;
 
     @Autowired
     public ProductPriceControllerTest(DateTimeFormatter dateTimeFormatter,
-                                      ObjectMapper objectMapper) {
+                                      ObjectMapper objectMapper,
+                                      RestClient restClient) {
         this.formatter = dateTimeFormatter;
         this.objectMapper = objectMapper;
+        this.restClient = restClient;
     }
 
     @Test
     void itShouldReturnProductPriceResponse() throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpUtils.getProductPrice(35455, 1, "2020-06-14-10.00.00");
+        HttpResponse<String> response = restClient.getProductPrice(35455, 1, "2020-06-14-10.00.00");
         ProductPriceResponse productPriceResponse = objectMapper.readValue(response.body(), ProductPriceResponse.class);
 
         assertEquals(HttpStatus.OK.value(), response.statusCode());
@@ -54,7 +57,7 @@ class ProductPriceControllerTest {
 
     @Test
     void itShouldReturnBadRequestResponse() throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpUtils.getProductPrice(35455, 1, "BAD_DATE");
+        HttpResponse<String> response = restClient.getProductPrice(35455, 1, "BAD_DATE");
         ErrorResponse errorResponse = objectMapper.readValue(response.body(), ErrorResponse.class);
 
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.statusCode());
@@ -63,7 +66,7 @@ class ProductPriceControllerTest {
 
     @Test
     void itShouldReturnNotFoundResponse() throws IOException, InterruptedException {
-        HttpResponse<String> response = HttpUtils.getProductPrice(1, 1, "2020-06-14-10.00.00");
+        HttpResponse<String> response = restClient.getProductPrice(1, 1, "2020-06-14-10.00.00");
 
         assertEquals(HttpStatus.NOT_FOUND.value(), response.statusCode());
         assertTrue(response.body().isEmpty());
