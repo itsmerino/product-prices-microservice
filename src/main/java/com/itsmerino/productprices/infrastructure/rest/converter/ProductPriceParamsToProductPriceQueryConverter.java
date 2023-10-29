@@ -1,6 +1,6 @@
-package com.itsmerino.productprices.infrastructure.rest;
+package com.itsmerino.productprices.infrastructure.rest.converter;
 
-import com.itsmerino.productprices.application.ProductPriceQuery;
+import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

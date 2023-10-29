@@ -1,8 +1,12 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search;
 
-import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
+import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
+import com.itsmerino.productprices.application.search.dto.ProductPriceQueryMother;
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponseMother;
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.domain.ProductPriceMother;
+import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
 import com.itsmerino.productprices.domain.ProductPricePort;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.convert.ConversionService;
@@ -10,7 +14,8 @@ import org.springframework.core.convert.ConversionService;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;

@@ -1,5 +1,6 @@
-package com.itsmerino.productprices.infrastructure.rest;
+package com.itsmerino.productprices.infrastructure.rest.converter;
 
+import com.itsmerino.productprices.infrastructure.rest.dto.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

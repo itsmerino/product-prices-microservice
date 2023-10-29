@@ -1,6 +1,7 @@
 package com.itsmerino.productprices.infrastructure.rest;
 
 import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
+import com.itsmerino.productprices.infrastructure.rest.dto.ErrorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search.dto;
 
 import java.time.LocalDateTime;
 import java.util.Currency;

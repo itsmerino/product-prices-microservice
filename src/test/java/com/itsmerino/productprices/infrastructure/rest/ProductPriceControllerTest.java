@@ -2,8 +2,9 @@ package com.itsmerino.productprices.infrastructure.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmerino.productprices.ProductPricesApplication;
-import com.itsmerino.productprices.application.ProductPriceResponse;
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.config.TestConfiguration;
+import com.itsmerino.productprices.infrastructure.rest.dto.ErrorResponse;
 import com.itsmerino.productprices.shared.RestClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

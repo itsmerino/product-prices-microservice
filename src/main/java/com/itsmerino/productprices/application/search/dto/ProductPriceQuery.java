@@ -1,4 +1,4 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search.dto;
 
 import lombok.Builder;
 import lombok.Getter;

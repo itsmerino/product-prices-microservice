@@ -1,5 +1,7 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search;
 
+import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
 import com.itsmerino.productprices.domain.ProductPricePort;

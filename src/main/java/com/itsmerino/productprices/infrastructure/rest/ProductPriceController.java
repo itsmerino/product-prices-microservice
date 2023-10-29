@@ -1,9 +1,9 @@
 package com.itsmerino.productprices.infrastructure.rest;
 
-import com.itsmerino.productprices.application.ProductPriceQuery;
-import com.itsmerino.productprices.application.ProductPriceResponse;
-import com.itsmerino.productprices.application.SearchProductPriceHandler;
-import com.itsmerino.productprices.shared.ApiRoutes;
+import com.itsmerino.productprices.application.search.SearchProductPriceHandler;
+import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
+import com.itsmerino.productprices.infrastructure.rest.converter.ProductPriceParamsToProductPriceQueryConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
-import static com.itsmerino.productprices.shared.Constants.*;
+import static com.itsmerino.productprices.shared.Constants.DATE_FORMAT;
 
 @RestController
 @RequestMapping(ApiRoutes.PRODUCT_PRICES_V1)

@@ -1,4 +1,4 @@
-package com.itsmerino.productprices.shared;
+package com.itsmerino.productprices.infrastructure.rest;
 
 public class ApiRoutes {
 

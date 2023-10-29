@@ -1,4 +1,4 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.itsmerino.productprices.shared.Constants;

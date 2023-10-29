@@ -1,4 +1,4 @@
-package com.itsmerino.productprices.infrastructure.rest;
+package com.itsmerino.productprices.infrastructure.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

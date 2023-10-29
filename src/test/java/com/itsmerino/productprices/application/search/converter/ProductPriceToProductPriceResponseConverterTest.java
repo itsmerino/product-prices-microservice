@@ -1,5 +1,6 @@
-package com.itsmerino.productprices.application;
+package com.itsmerino.productprices.application.search.converter;
 
+import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.domain.ProductPriceMother;
 import org.junit.jupiter.api.Test;

@@ -1,11 +1,12 @@
-package com.itsmerino.productprices.infrastructure.rest;
+package com.itsmerino.productprices.infrastructure.rest.converter;
 
-import com.itsmerino.productprices.application.ProductPriceQuery;
+import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductPriceParamsToProductPriceQueryConverterTest {
 
