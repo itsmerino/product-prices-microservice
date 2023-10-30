@@ -1,4 +1,4 @@
-# Product Prices Microservice [![ci](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml/badge.svg)](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml) [![codecov](https://codecov.io/gh/itsmerino/product-prices-microservice/branch/master/graph/badge.svg)](https://codecov.io/gh/itsmerino/product-prices-microservice)
+# Product Prices Microservice [![ci](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml/badge.svg)](https://github.com/itsmerino/product-prices-microservice/actions/workflows/maven.yml) [![codecov](https://codecov.io/gh/itsmerino/product-prices-microservice/branch/main/graph/badge.svg)](https://codecov.io/gh/itsmerino/product-prices-microservice)
 
 Service that provides product prices through a REST endpoint.
 
