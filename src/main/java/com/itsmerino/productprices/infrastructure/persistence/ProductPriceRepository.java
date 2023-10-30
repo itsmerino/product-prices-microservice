@@ -1,14 +1,14 @@
 package com.itsmerino.productprices.infrastructure.persistence;
 
-import com.itsmerino.productprices.domain.ProductPrice;
+import com.itsmerino.productprices.infrastructure.persistence.entity.ProductPriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ProductPriceRepository extends JpaRepository<ProductPrice, Integer> {
+public interface ProductPriceRepository extends JpaRepository<ProductPriceEntity, Integer> {
 
-    List<ProductPrice> findAllByProductIdAndBrandId(Integer productId,
-                                                    Integer brandId);
+    List<ProductPriceEntity> findAllByProductIdAndBrandId(Integer productId,
+                                                          Integer brandId);
 }

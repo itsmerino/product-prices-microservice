@@ -28,7 +28,6 @@ public class ProductPriceMother {
         Random random = new Random();
 
         return ProductPrice.builder()
-                .id(random.nextInt())
                 .productId(1)
                 .brandId(1)
                 .rate(random.nextInt(4))
