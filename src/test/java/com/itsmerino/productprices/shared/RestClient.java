@@ -1,9 +1,6 @@
 package com.itsmerino.productprices.shared;
 
 import com.itsmerino.productprices.infrastructure.rest.ApiRoutes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,7 +12,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
 public class RestClient {
 
     private static final String LOCALHOST = "http://localhost:";
@@ -28,9 +24,8 @@ public class RestClient {
 
     private final String apiUrl;
 
-    @Autowired
-    public RestClient(@Value("${server.port}") Integer port,
-                      @Value("${server.servlet.context-path}") String contextPath) {
+    public RestClient(Integer port,
+                      String contextPath) {
         this.apiUrl = LOCALHOST + port + contextPath;
     }
 

@@ -9,7 +9,6 @@ import com.itsmerino.productprices.domain.ProductPriceMother;
 import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
 import com.itsmerino.productprices.domain.ProductPricePort;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.convert.support.GenericConversionService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,13 +20,10 @@ import static org.mockito.Mockito.when;
 
 class SearchProductPriceHandlerTest {
 
-    private final GenericConversionService conversionService = new GenericConversionService();
     private final ProductPricePort productPricePort = mock(ProductPricePort.class);
-    private final SearchProductPriceHandler sut = new SearchProductPriceHandler(conversionService, productPricePort);
+    private final ProductPriceToProductPriceResponseConverter converter = new ProductPriceToProductPriceResponseConverter();
+    private final SearchProductPriceHandler sut = new SearchProductPriceHandler(productPricePort, converter);
 
-    public SearchProductPriceHandlerTest() {
-        conversionService.addConverter(new ProductPriceToProductPriceResponseConverter());
-    }
 
     @Test
     void itShouldReturnAppropriateProductPriceResponse() {

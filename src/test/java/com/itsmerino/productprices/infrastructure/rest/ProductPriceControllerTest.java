@@ -3,13 +3,12 @@ package com.itsmerino.productprices.infrastructure.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmerino.productprices.ProductPricesApplication;
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
-import com.itsmerino.productprices.config.TestConfiguration;
+import com.itsmerino.productprices.infrastructure.config.TestConfiguration;
 import com.itsmerino.productprices.infrastructure.rest.dto.ErrorResponse;
 import com.itsmerino.productprices.shared.RestClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -44,7 +43,7 @@ class ProductPriceControllerTest {
         HttpResponse<String> response = restClient.getProductPrice(35455, 1, "2020-06-14-10.00.00");
         ProductPriceResponse productPriceResponse = objectMapper.readValue(response.body(), ProductPriceResponse.class);
 
-        assertEquals(HttpStatus.OK.value(), response.statusCode());
+        assertEquals(200, response.statusCode());
         assertAll(
                 () -> assertEquals(35455, productPriceResponse.getProductId()),
                 () -> assertEquals(1, productPriceResponse.getBrandId()),
@@ -61,7 +60,7 @@ class ProductPriceControllerTest {
         HttpResponse<String> response = restClient.getProductPrice(null, 1, "2020-06-14-10.00.00");
         ErrorResponse errorResponse = objectMapper.readValue(response.body(), ErrorResponse.class);
 
-        assertEquals(HttpStatus.BAD_REQUEST.value(), response.statusCode());
+        assertEquals(400, response.statusCode());
         assertEquals("Parameter [productId] is missing", errorResponse.getMessage());
     }
 
@@ -70,7 +69,7 @@ class ProductPriceControllerTest {
         HttpResponse<String> response = restClient.getProductPrice(35455, 1, "BAD_DATE");
         ErrorResponse errorResponse = objectMapper.readValue(response.body(), ErrorResponse.class);
 
-        assertEquals(HttpStatus.BAD_REQUEST.value(), response.statusCode());
+        assertEquals(400, response.statusCode());
         assertEquals("Parameter [date] is invalid", errorResponse.getMessage());
     }
 
@@ -78,7 +77,7 @@ class ProductPriceControllerTest {
     void itShouldReturnNotFoundResponse() throws IOException, InterruptedException {
         HttpResponse<String> response = restClient.getProductPrice(1, 1, "2020-06-14-10.00.00");
 
-        assertEquals(HttpStatus.NOT_FOUND.value(), response.statusCode());
+        assertEquals(404, response.statusCode());
         assertTrue(response.body().isEmpty());
     }
 }

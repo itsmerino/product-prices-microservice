@@ -4,7 +4,6 @@ import com.itsmerino.productprices.application.search.SearchProductPriceHandler;
 import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.infrastructure.rest.converter.ProductPriceParamsToProductPriceQueryConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ public class ProductPriceController {
     private final ProductPriceParamsToProductPriceQueryConverter converter;
     private final SearchProductPriceHandler searchProductPriceHandler;
 
-    @Autowired
     public ProductPriceController(ProductPriceParamsToProductPriceQueryConverter converter,
                                   SearchProductPriceHandler searchProductPriceHandler) {
         this.converter = converter;

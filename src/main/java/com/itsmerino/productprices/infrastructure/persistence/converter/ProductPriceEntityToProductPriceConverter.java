@@ -2,10 +2,8 @@ package com.itsmerino.productprices.infrastructure.persistence.converter;
 
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.infrastructure.persistence.entity.ProductPriceEntity;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import com.itsmerino.productprices.shared.Converter;
 
-@Component
 public class ProductPriceEntityToProductPriceConverter implements Converter<ProductPriceEntity, ProductPrice> {
 
     @Override

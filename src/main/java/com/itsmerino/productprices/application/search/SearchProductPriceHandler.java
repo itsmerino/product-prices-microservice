@@ -1,29 +1,25 @@
 package com.itsmerino.productprices.application.search;
 
+import com.itsmerino.productprices.application.search.converter.ProductPriceToProductPriceResponseConverter;
 import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
 import com.itsmerino.productprices.domain.ProductPricePort;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
-@Component
 public class SearchProductPriceHandler {
 
-    private final ConversionService conversionService;
     private final ProductPricePort productPricePort;
+    private final ProductPriceToProductPriceResponseConverter converter;
 
-    @Autowired
-    public SearchProductPriceHandler(ConversionService conversionService,
-                                     ProductPricePort productPricePort) {
-        this.conversionService = conversionService;
+    public SearchProductPriceHandler(ProductPricePort productPricePort,
+                                     ProductPriceToProductPriceResponseConverter converter) {
         this.productPricePort = productPricePort;
+        this.converter = converter;
     }
 
     public ProductPriceResponse handle(ProductPriceQuery productPriceQuery) {
@@ -44,6 +40,6 @@ public class SearchProductPriceHandler {
     }
 
     private ProductPriceResponse mapToProductPriceResponse(ProductPrice productPrice) {
-        return conversionService.convert(productPrice, ProductPriceResponse.class);
+        return converter.convert(productPrice);
     }
 }

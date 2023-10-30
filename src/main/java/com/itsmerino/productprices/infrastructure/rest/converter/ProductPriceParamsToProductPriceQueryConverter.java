@@ -1,12 +1,11 @@
 package com.itsmerino.productprices.infrastructure.rest.converter;
 
 import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
-import org.springframework.stereotype.Component;
+import com.itsmerino.productprices.shared.ConverterMultiSource;
 
 import java.time.LocalDateTime;
 
-@Component
-public class ProductPriceParamsToProductPriceQueryConverter {
+public class ProductPriceParamsToProductPriceQueryConverter implements ConverterMultiSource<Integer, Integer, LocalDateTime, ProductPriceQuery> {
 
     public ProductPriceQuery convert(Integer productId,
                                      Integer brandId,

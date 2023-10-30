@@ -3,13 +3,12 @@ package com.itsmerino.productprices.steps;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itsmerino.productprices.ProductPricesApplication;
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
-import com.itsmerino.productprices.config.TestConfiguration;
+import com.itsmerino.productprices.infrastructure.config.TestConfiguration;
 import com.itsmerino.productprices.shared.RestClient;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class ProductPricesStepDefs {
 
     private ProductPriceResponse productPriceResponse;
 
-    @Autowired
     public ProductPricesStepDefs(DateTimeFormatter dateTimeFormatter,
                                  ObjectMapper objectMapper,
                                  RestClient restClient) {

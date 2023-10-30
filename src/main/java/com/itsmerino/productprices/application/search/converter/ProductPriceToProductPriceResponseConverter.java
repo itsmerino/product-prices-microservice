@@ -2,10 +2,8 @@ package com.itsmerino.productprices.application.search.converter;
 
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
 import com.itsmerino.productprices.domain.ProductPrice;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import com.itsmerino.productprices.shared.Converter;
 
-@Component
 public class ProductPriceToProductPriceResponseConverter implements Converter<ProductPrice, ProductPriceResponse> {
 
     @Override
