@@ -6,25 +6,25 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 @Component
-public class MethodArgumentTypeMismatchExceptionToErrorResponseConverter implements Converter<MethodArgumentTypeMismatchException, ErrorResponse> {
+public class MissingServletRequestParameterExceptionToErrorResponseConverter implements Converter<MissingServletRequestParameterException, ErrorResponse> {
 
-    public static final String INVALID_PARAMETER_MESSAGE = "invalid-parameter.message";
+    public static final String MISSING_PARAMETER_MESSAGE = "missing-parameter.message";
 
     private final MessageSource messageSource;
 
     @Autowired
-    public MethodArgumentTypeMismatchExceptionToErrorResponseConverter(MessageSource messageSource) {
+    public MissingServletRequestParameterExceptionToErrorResponseConverter(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
     @Override
-    public ErrorResponse convert(MethodArgumentTypeMismatchException exception) {
+    public ErrorResponse convert(MissingServletRequestParameterException exception) {
         String message = messageSource.getMessage(
-                INVALID_PARAMETER_MESSAGE,
-                new String[]{ exception.getName() },
+                MISSING_PARAMETER_MESSAGE,
+                new String[]{ exception.getParameterName() },
                 LocaleContextHolder.getLocale()
         );
 

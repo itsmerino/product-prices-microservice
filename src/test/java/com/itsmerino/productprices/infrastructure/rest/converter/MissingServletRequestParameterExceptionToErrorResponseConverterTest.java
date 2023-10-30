@@ -3,7 +3,7 @@ package com.itsmerino.productprices.infrastructure.rest.converter;
 import com.itsmerino.productprices.infrastructure.rest.dto.ErrorResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.MessageSource;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 import java.util.Locale;
 
@@ -14,15 +14,15 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class MethodArgumentTypeMismatchExceptionToErrorResponseConverterTest {
+class MissingServletRequestParameterExceptionToErrorResponseConverterTest {
 
     private final MessageSource messageSource = mock(MessageSource.class);
-    private final MethodArgumentTypeMismatchExceptionToErrorResponseConverter sut = new MethodArgumentTypeMismatchExceptionToErrorResponseConverter(messageSource);
+    private final MissingServletRequestParameterExceptionToErrorResponseConverter sut = new MissingServletRequestParameterExceptionToErrorResponseConverter(messageSource);
 
     @Test
-    void itShouldConvertMethodArgumentTypeMismatchExceptionToErrorResponse() {
-        String message = "Parameter [date] is invalid";
-        MethodArgumentTypeMismatchException exception = mock(MethodArgumentTypeMismatchException.class);
+    void itShouldConvertMissingServletRequestParameterExceptionToErrorResponse() {
+        String message = "Parameter [productId] is missing";
+        MissingServletRequestParameterException exception = mock(MissingServletRequestParameterException.class);
 
         when(messageSource.getMessage(anyString(), any(), any(Locale.class))).thenReturn(message);
 

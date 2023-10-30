@@ -57,7 +57,16 @@ class ProductPriceControllerTest {
     }
 
     @Test
-    void itShouldReturnBadRequestResponse() throws IOException, InterruptedException {
+    void itShouldReturnBadRequestResponseWhenParameterIsMissing() throws IOException, InterruptedException {
+        HttpResponse<String> response = restClient.getProductPrice(null, 1, "2020-06-14-10.00.00");
+        ErrorResponse errorResponse = objectMapper.readValue(response.body(), ErrorResponse.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.statusCode());
+        assertEquals("Parameter [productId] is missing", errorResponse.getMessage());
+    }
+
+    @Test
+    void itShouldReturnBadRequestResponseWhenParameterIsInvalid() throws IOException, InterruptedException {
         HttpResponse<String> response = restClient.getProductPrice(35455, 1, "BAD_DATE");
         ErrorResponse errorResponse = objectMapper.readValue(response.body(), ErrorResponse.class);
 
