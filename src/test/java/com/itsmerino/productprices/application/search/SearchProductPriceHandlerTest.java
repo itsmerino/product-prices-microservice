@@ -28,7 +28,7 @@ class SearchProductPriceHandlerTest {
     private final SearchProductPriceHandler sut = new SearchProductPriceHandler(conversionService, productPricePort);
 
     @Test
-    void itShouldReturnProductResponse() {
+    void itShouldReturnProductPriceResponse() {
         ProductPriceQuery productPriceQuery = ProductPriceQueryMother.random();
         ProductPrice productPrice = ProductPriceMother.random();
         ProductPriceResponse productPriceResponse = ProductPriceResponseMother.random();
@@ -40,7 +40,7 @@ class SearchProductPriceHandlerTest {
     }
 
     @Test
-    void itShouldThrowNotFoundException() {
+    void itShouldThrowProductPriceNotFoundException() {
         when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(List.of());
 
         assertThrows(ProductPriceNotFoundException.class, () -> sut.handle(ProductPriceQueryMother.random()));

@@ -12,7 +12,7 @@ class ProductPriceToProductPriceResponseConverterTest {
     private final ProductPriceToProductPriceResponseConverter sut = new ProductPriceToProductPriceResponseConverter();
 
     @Test
-    void itShouldConvertProductPriceToProductResponse() {
+    void itShouldConvertProductPriceToProductPriceResponse() {
         ProductPrice productPrice = ProductPriceMother.random();
         ProductPriceResponse productPriceResponse = sut.convert(productPrice);
 
