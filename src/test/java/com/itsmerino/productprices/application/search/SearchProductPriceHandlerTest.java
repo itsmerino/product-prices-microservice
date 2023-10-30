@@ -1,48 +1,71 @@
 package com.itsmerino.productprices.application.search;
 
+import com.itsmerino.productprices.application.search.converter.ProductPriceToProductPriceResponseConverter;
 import com.itsmerino.productprices.application.search.dto.ProductPriceQuery;
 import com.itsmerino.productprices.application.search.dto.ProductPriceQueryMother;
 import com.itsmerino.productprices.application.search.dto.ProductPriceResponse;
-import com.itsmerino.productprices.application.search.dto.ProductPriceResponseMother;
 import com.itsmerino.productprices.domain.ProductPrice;
 import com.itsmerino.productprices.domain.ProductPriceMother;
 import com.itsmerino.productprices.domain.ProductPriceNotFoundException;
 import com.itsmerino.productprices.domain.ProductPricePort;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.GenericConversionService;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class SearchProductPriceHandlerTest {
 
-    private final ConversionService conversionService = mock(ConversionService.class);
+    private final GenericConversionService conversionService = new GenericConversionService();
     private final ProductPricePort productPricePort = mock(ProductPricePort.class);
     private final SearchProductPriceHandler sut = new SearchProductPriceHandler(conversionService, productPricePort);
 
+    public SearchProductPriceHandlerTest() {
+        conversionService.addConverter(new ProductPriceToProductPriceResponseConverter());
+    }
+
     @Test
-    void itShouldReturnProductPriceResponse() {
-        ProductPriceQuery productPriceQuery = ProductPriceQueryMother.random();
-        ProductPrice productPrice = ProductPriceMother.random();
-        ProductPriceResponse productPriceResponse = ProductPriceResponseMother.random();
+    void itShouldReturnAppropriateProductPriceResponse() {
+        ProductPriceQuery productPriceQuery = ProductPriceQueryMother.withDate(LocalDateTime.of(2023, 10, 13, 0, 0));
+        ProductPrice productPriceOne = ProductPriceMother.withPriorityAndDates(
+                0,
+                LocalDateTime.of(2023, 10, 1, 0, 0),
+                LocalDateTime.of(2023, 10, 15, 0, 0)
+        );
+        ProductPrice productPriceTwo = ProductPriceMother.withPriorityAndDates(
+                1,
+                LocalDateTime.of(2023, 10, 12, 0, 0),
+                LocalDateTime.of(2023, 10, 30, 0, 0)
+        );
 
-        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(List.of(productPrice));
-        when(conversionService.convert(productPrice, ProductPriceResponse.class)).thenReturn(productPriceResponse);
+        when(productPricePort.search(anyInt(), anyInt())).thenReturn(List.of(productPriceOne, productPriceTwo));
 
-        assertEquals(productPriceResponse, sut.handle(productPriceQuery));
+        ProductPriceResponse productPriceResponse = sut.handle(productPriceQuery);
+
+        assertAll(
+                () -> assertEquals(productPriceTwo.getProductId(), productPriceResponse.getProductId()),
+                () -> assertEquals(productPriceTwo.getBrandId(), productPriceResponse.getBrandId()),
+                () -> assertEquals(productPriceTwo.getStartDate(), productPriceResponse.getStartDate()),
+                () -> assertEquals(productPriceTwo.getEndDate(), productPriceResponse.getEndDate())
+        );
     }
 
     @Test
     void itShouldThrowProductPriceNotFoundException() {
-        when(productPricePort.search(anyInt(), anyInt(), any(LocalDateTime.class))).thenReturn(List.of());
+        ProductPriceQuery productPriceQuery = ProductPriceQueryMother.withDate(LocalDateTime.of(2023, 10, 30, 0, 0));
+        ProductPrice productPrice = ProductPriceMother.withPriorityAndDates(
+                0,
+                LocalDateTime.of(2023, 10, 1, 0, 0),
+                LocalDateTime.of(2023, 10, 15, 0, 0)
+        );
 
-        assertThrows(ProductPriceNotFoundException.class, () -> sut.handle(ProductPriceQueryMother.random()));
+        when(productPricePort.search(anyInt(), anyInt())).thenReturn(List.of(productPrice));
+
+        assertThrows(ProductPriceNotFoundException.class, () -> sut.handle(productPriceQuery));
     }
 }

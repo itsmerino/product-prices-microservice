@@ -9,16 +9,30 @@ public class ProductPriceMother {
     public static ProductPrice random() {
         Random random = new Random();
 
-        return ProductPrice.builder()
-                .id(random.nextInt())
-                .productId(random.nextInt())
-                .brandId(random.nextInt())
-                .priority(random.nextInt())
-                .rate(random.nextInt())
+        return buildCommonFields()
+                .priority(random.nextInt(1))
                 .startDate(LocalDateTime.now())
                 .endDate(LocalDateTime.now())
-                .price(random.nextDouble())
-                .currency(Currency.getInstance("EUR"))
                 .build();
+    }
+
+    public static ProductPrice withPriorityAndDates(Integer priority, LocalDateTime startDate, LocalDateTime endDate) {
+        return buildCommonFields()
+                .priority(priority)
+                .startDate(startDate)
+                .endDate(endDate)
+                .build();
+    }
+
+    private static ProductPrice.ProductPriceBuilder buildCommonFields() {
+        Random random = new Random();
+
+        return ProductPrice.builder()
+                .id(random.nextInt())
+                .productId(1)
+                .brandId(1)
+                .rate(random.nextInt(4))
+                .price(random.nextDouble())
+                .currency(Currency.getInstance("EUR"));
     }
 }

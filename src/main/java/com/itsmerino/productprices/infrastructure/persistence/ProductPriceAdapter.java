@@ -5,7 +5,6 @@ import com.itsmerino.productprices.domain.ProductPricePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -20,8 +19,7 @@ public class ProductPriceAdapter implements ProductPricePort {
 
     @Override
     public List<ProductPrice> search(Integer productId,
-                                     Integer brandId,
-                                     LocalDateTime date) {
-        return productPriceRepository.findAllByProductIdAndBrandIdAndDate(productId, brandId, date);
+                                     Integer brandId) {
+        return productPriceRepository.findAllByProductIdAndBrandId(productId, brandId);
     }
 }

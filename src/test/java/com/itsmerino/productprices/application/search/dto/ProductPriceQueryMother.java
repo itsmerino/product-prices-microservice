@@ -1,18 +1,14 @@
 package com.itsmerino.productprices.application.search.dto;
 
-
 import java.time.LocalDateTime;
-import java.util.Random;
 
 public class ProductPriceQueryMother {
 
-    public static ProductPriceQuery random() {
-        Random random = new Random();
-
+    public static ProductPriceQuery withDate(LocalDateTime date) {
         return ProductPriceQuery.builder()
-                .productId(random.nextInt())
-                .brandId(random.nextInt())
-                .date(LocalDateTime.now())
+                .productId(1)
+                .brandId(1)
+                .date(date)
                 .build();
     }
 }
